@@ -1,4 +1,4 @@
-RangeBar
+RangeBar with a Point Indicator
 =======
 The RangeBar is similar to an enhanced SeekBar widget, though it doesn't make use of the SeekBar. It provides for the selection of a range of values rather than a single value. The selectable range values are discrete values designated by tick marks; the thumb (handle) will snap to the nearest tick mark.
 
@@ -21,7 +21,7 @@ If any of the following attributes are specified, the thumb images will be ignor
 Finally, the following property can be set programmatically, but not via XML:
 - thumb indices (the location of the thumbs on the RangeBar)
 
-Supported on API Level 7 and above.
+Supported on API Level 15 and above.
 
 For more information, see the linked Github Wiki page.
 
@@ -35,16 +35,16 @@ Installation
 **build.gradle**
 
 	repositories {
-		mavenCentral()
+		maven { url 'https://jitpack.io' }
 	}
 
 	dependencies {
-	  compile 'com.edmodo:rangebar:1.0.0'
+	  compile 'com.github.legionco:range-bar:v0.0.3'
 	}
 
 License
 =======
-Copyright 2013, Edmodo, Inc. 
+Copyright 2017, Legion, Inc. 
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License.
 You may obtain a copy of the License in the LICENSE file, or at:
