@@ -18,7 +18,7 @@ import android.view.View;
  * http://www.yougli.net/android/a-photoshop-like-color-picker
  * -for-your-android-application/ and is open source and available for
  * developers to modify and distribute.
- * 
+ *
  * @author www.youglie.net
  */
 public class ColorPickerDialog extends Dialog {
@@ -56,37 +56,37 @@ public class ColorPickerDialog extends Dialog {
             // Initialize the colors of the hue slider bar
             int index = 0;
             for (float i = 0; i < 256; i += 256 / 42) // Red (#f00) to pink
-                                                      // (#f0f)
+            // (#f0f)
             {
                 mHueBarColors[index] = Color.rgb(255, 0, (int) i);
                 index++;
             }
             for (float i = 0; i < 256; i += 256 / 42) // Pink (#f0f) to blue
-                                                      // (#00f)
+            // (#00f)
             {
                 mHueBarColors[index] = Color.rgb(255 - (int) i, 0, 255);
                 index++;
             }
             for (float i = 0; i < 256; i += 256 / 42) // Blue (#00f) to light
-                                                      // blue (#0ff)
+            // blue (#0ff)
             {
                 mHueBarColors[index] = Color.rgb(0, (int) i, 255);
                 index++;
             }
             for (float i = 0; i < 256; i += 256 / 42) // Light blue (#0ff) to
-                                                      // green (#0f0)
+            // green (#0f0)
             {
                 mHueBarColors[index] = Color.rgb(0, 255, 255 - (int) i);
                 index++;
             }
             for (float i = 0; i < 256; i += 256 / 42) // Green (#0f0) to yellow
-                                                      // (#ff0)
+            // (#ff0)
             {
                 mHueBarColors[index] = Color.rgb((int) i, 255, 0);
                 index++;
             }
             for (float i = 0; i < 256; i += 256 / 42) // Yellow (#ff0) to red
-                                                      // (#f00)
+            // (#f00)
             {
                 mHueBarColors[index] = Color.rgb(255, 255 - (int) i, 0);
                 index++;
@@ -99,42 +99,35 @@ public class ColorPickerDialog extends Dialog {
         }
 
         // Get the current selected color from the hue bar
-        private int getCurrentMainColor()
-        {
+        private int getCurrentMainColor() {
             int translatedHue = 255 - (int) (mCurrentHue * 255 / 360);
             int index = 0;
-            for (float i = 0; i < 256; i += 256 / 42)
-            {
+            for (float i = 0; i < 256; i += 256 / 42) {
                 if (index == translatedHue)
                     return Color.rgb(255, 0, (int) i);
                 index++;
             }
-            for (float i = 0; i < 256; i += 256 / 42)
-            {
+            for (float i = 0; i < 256; i += 256 / 42) {
                 if (index == translatedHue)
                     return Color.rgb(255 - (int) i, 0, 255);
                 index++;
             }
-            for (float i = 0; i < 256; i += 256 / 42)
-            {
+            for (float i = 0; i < 256; i += 256 / 42) {
                 if (index == translatedHue)
                     return Color.rgb(0, (int) i, 255);
                 index++;
             }
-            for (float i = 0; i < 256; i += 256 / 42)
-            {
+            for (float i = 0; i < 256; i += 256 / 42) {
                 if (index == translatedHue)
                     return Color.rgb(0, 255, 255 - (int) i);
                 index++;
             }
-            for (float i = 0; i < 256; i += 256 / 42)
-            {
+            for (float i = 0; i < 256; i += 256 / 42) {
                 if (index == translatedHue)
                     return Color.rgb((int) i, 255, 0);
                 index++;
             }
-            for (float i = 0; i < 256; i += 256 / 42)
-            {
+            for (float i = 0; i < 256; i += 256 / 42) {
                 if (index == translatedHue)
                     return Color.rgb(255, 255 - (int) i, 0);
                 index++;
@@ -143,26 +136,21 @@ public class ColorPickerDialog extends Dialog {
         }
 
         // Update the main field colors depending on the current selected hue
-        private void updateMainColors()
-        {
+        private void updateMainColors() {
             int mainColor = getCurrentMainColor();
             int index = 0;
             int[] topColors = new int[256];
-            for (int y = 0; y < 256; y++)
-            {
-                for (int x = 0; x < 256; x++)
-                {
-                    if (y == 0)
-                    {
+            for (int y = 0; y < 256; y++) {
+                for (int x = 0; x < 256; x++) {
+                    if (y == 0) {
                         mMainColors[index] = Color.rgb(255 - (255 - Color.red(mainColor)) * x / 255,
-                                                       255 - (255 - Color.green(mainColor)) * x / 255,
-                                                       255 - (255 - Color.blue(mainColor)) * x / 255);
+                                255 - (255 - Color.green(mainColor)) * x / 255,
+                                255 - (255 - Color.blue(mainColor)) * x / 255);
                         topColors[x] = mMainColors[index];
-                    }
-                    else
+                    } else
                         mMainColors[index] = Color.rgb((255 - y) * Color.red(topColors[x]) / 255,
-                                                       (255 - y) * Color.green(topColors[x]) / 255,
-                                                       (255 - y) * Color.blue(topColors[x]) / 255);
+                                (255 - y) * Color.green(topColors[x]) / 255,
+                                (255 - y) * Color.blue(topColors[x]) / 255);
                     index++;
                 }
             }
@@ -172,16 +160,13 @@ public class ColorPickerDialog extends Dialog {
         protected void onDraw(Canvas canvas) {
             int translatedHue = 255 - (int) (mCurrentHue * 255 / 360);
             // Display all the colors of the hue bar with lines
-            for (int x = 0; x < 256; x++)
-            {
+            for (int x = 0; x < 256; x++) {
                 // If this is not the current selected hue, display the actual
                 // color
-                if (translatedHue != x)
-                {
+                if (translatedHue != x) {
                     mPaint.setColor(mHueBarColors[x]);
                     mPaint.setStrokeWidth(1);
-                }
-                else // else display a slightly larger black line
+                } else // else display a slightly larger black line
                 {
                     mPaint.setColor(Color.BLACK);
                     mPaint.setStrokeWidth(3);
@@ -190,8 +175,7 @@ public class ColorPickerDialog extends Dialog {
             }
 
             // Display the main field colors using LinearGradient
-            for (int x = 0; x < 256; x++)
-            {
+            for (int x = 0; x < 256; x++) {
                 int[] colors = new int[2];
                 colors[0] = mMainColors[x];
                 colors[1] = Color.BLACK;
@@ -203,8 +187,7 @@ public class ColorPickerDialog extends Dialog {
 
             // Display the circle around the currently selected color in the
             // main field
-            if (mCurrentX != 0 && mCurrentY != 0)
-            {
+            if (mCurrentX != 0 && mCurrentY != 0) {
                 mPaint.setStyle(Paint.Style.STROKE);
                 mPaint.setColor(Color.BLACK);
                 canvas.drawCircle(mCurrentX, mCurrentY, 10, mPaint);
@@ -248,8 +231,7 @@ public class ColorPickerDialog extends Dialog {
             float y = event.getY();
 
             // If the touch event is located in the hue bar
-            if (x > 10 && x < 266 && y > 0 && y < 40)
-            {
+            if (x > 10 && x < 266 && y > 0 && y < 40) {
                 // Update the main field colors
                 mCurrentHue = (255 - x) * 360 / 255;
                 updateMainColors();
@@ -266,15 +248,13 @@ public class ColorPickerDialog extends Dialog {
             }
 
             // If the touch event is located in the main field
-            if (x > 10 && x < 266 && y > 50 && y < 306)
-            {
+            if (x > 10 && x < 266 && y > 50 && y < 306) {
                 mCurrentX = (int) x;
                 mCurrentY = (int) y;
                 int transX = mCurrentX - 10;
                 int transY = mCurrentY - 60;
                 int index = 256 * (transY - 1) + transX;
-                if (index > 0 && index < mMainColors.length)
-                {
+                if (index > 0 && index < mMainColors.length) {
                     // Update the current color
                     mCurrentColor = mMainColors[index];
                     // Force the redraw of the dialog

@@ -2,14 +2,26 @@ buildscript {
 
     repositories {
         mavenCentral()
+        google()
+        jcenter()
     }
     dependencies {
-        // Plug-in release notes: http://tools.android.com/tech-docs/new-build-system
-        classpath 'com.android.tools.build:gradle:0.11.+'
+        classpath 'com.android.tools.build:gradle:3.0.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     }
 }
 
-task wrapper(type: Wrapper) {
-    // See latest Gradle version: http://www.gradle.org/downloads
-    gradleVersion = '1.12'
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
