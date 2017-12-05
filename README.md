@@ -27,7 +27,7 @@ For more information, see the linked Github Wiki page.
 
 https://github.com/edmodo/range-bar/wiki
 
-![ScreenShot](http://i.imgur.com/q85GhRjl.png)
+![ScreenShot](https://github.com/legionco/range-bar/blob/master/Screenshot.png)
 
 Installation
 =======
