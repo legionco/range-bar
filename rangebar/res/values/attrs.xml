@@ -12,6 +12,10 @@
         <attr name="thumbImagePressed" format="reference" />
         <attr name="thumbColorNormal" format="reference|color"/>
         <attr name="thumbColorPressed" format="reference|color"/>
+
+        <attr name="showPointIndicator" format="boolean"/>
+        <attr name="pointIndicator" format="reference"/>
+        <attr name="pointIndicatorY" format="integer"/>
     </declare-styleable>
 
 </resources>

@@ -1,7 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:id="@+id/mylayout"
@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context=".MainActivity" >
+        tools:context=".MainActivity">
 
         <TextView
             android:id="@+id/title"
@@ -23,13 +23,15 @@
             android:text="@string/title"
             android:textSize="40sp" />
 
-        <com.edmodo.rangebar.RangeBar
-            xmlns:custom="http://schemas.android.com/apk/res-auto"
+        <com.edmodo.rangebar.RangeBar xmlns:custom="http://schemas.android.com/apk/res-auto"
             android:id="@+id/rangebar1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
             android:layout_marginTop="50dp"
+            custom:pointIndicator="@drawable/ic_adjust_red_24dp"
+            custom:pointIndicatorY="3"
+            custom:showPointIndicator="true"
             custom:tickCount="7" />
 
         <LinearLayout
@@ -37,19 +39,19 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="40dp"
-            android:paddingRight="40dp" >
+            android:paddingRight="40dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/leftIndex"
@@ -70,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/rightIndex"

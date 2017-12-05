@@ -72,6 +72,12 @@ public class RangeBar extends View {
     private int mThumbColorNormal = DEFAULT_THUMB_COLOR_NORMAL;
     private int mThumbColorPressed = DEFAULT_THUMB_COLOR_PRESSED;
 
+
+    private boolean mShowPointIndicator = false;
+    private int mPointIndicatorImageRes = 0;
+    private int mPointIndicatorIndex = 0;
+    private PointIndicator mPointIndicator;
+
     // setTickCount only resets indices before a thumb has been pressed or a
     // setThumbIndices() is called, to correspond with intended usage
     private boolean mFirstSetTickCount = true;
@@ -132,6 +138,10 @@ public class RangeBar extends View {
 
         bundle.putBoolean("FIRST_SET_TICK_COUNT", mFirstSetTickCount);
 
+        bundle.putInt("POINT_INDICATOR_INDEX", mPointIndicatorIndex);
+        bundle.putInt("POINT_INDICATOR_IMAGE", mPointIndicatorImageRes);
+        bundle.putBoolean("POINT_INDICATOR_SHOW", mShowPointIndicator);
+
         return bundle;
     }
 
@@ -159,6 +169,10 @@ public class RangeBar extends View {
             mLeftIndex = bundle.getInt("LEFT_INDEX");
             mRightIndex = bundle.getInt("RIGHT_INDEX");
             mFirstSetTickCount = bundle.getBoolean("FIRST_SET_TICK_COUNT");
+
+            mPointIndicatorIndex = bundle.getInt("POINT_INDICATOR_INDEX");
+            mPointIndicatorImageRes = bundle.getInt("POINT_INDICATOR_IMAGE");
+            mShowPointIndicator = bundle.getBoolean("POINT_INDICATOR_SHOW");
 
             setThumbIndices(mLeftIndex, mRightIndex);
 
@@ -255,6 +269,11 @@ public class RangeBar extends View {
 
         // Create the line connecting the two thumbs.
         mConnectingLine = new ConnectingLine(ctx, yPos, mConnectingLineWeight, mConnectingLineColor);
+
+        float x = marginLeft + (mPointIndicatorIndex / (float) (mTickCount - 1)) * barLength;
+        mPointIndicator = new PointIndicator(ctx,
+                mShowPointIndicator,
+                mPointIndicatorImageRes, x, yPos, Color.RED);
     }
 
     @Override
@@ -265,7 +284,7 @@ public class RangeBar extends View {
         mBar.draw(canvas);
 
         mConnectingLine.draw(canvas, mLeftThumb, mRightThumb);
-
+        mPointIndicator.draw(canvas);
         mLeftThumb.draw(canvas);
         mRightThumb.draw(canvas);
 
@@ -371,6 +390,26 @@ public class RangeBar extends View {
 
         mBarWeight = barWeight;
         createBar();
+    }
+
+    /**
+     * Set the point indicator location, start from 0
+     *
+     * @param yValue int
+     */
+    public void setPointIndicatorY(int yValue) {
+        mShowPointIndicator = true;
+        mPointIndicatorIndex = yValue;
+        createPointIndicator();
+    }
+
+    public float getPointerIndicatorXPosition() {
+        return mPointIndicator.getX();
+    }
+
+    public void hidePointIndicator(){
+        mShowPointIndicator = false;
+        createPointIndicator();
     }
 
     /**
@@ -567,6 +606,17 @@ public class RangeBar extends View {
             mThumbColorPressed = ta.getColor(R.styleable.RangeBar_thumbColorPressed,
                     DEFAULT_THUMB_COLOR_PRESSED);
 
+            mThumbColorPressed = ta.getColor(R.styleable.RangeBar_thumbColorPressed,
+                    DEFAULT_THUMB_COLOR_PRESSED);
+
+
+            mShowPointIndicator = ta.getBoolean(R.styleable.RangeBar_showPointIndicator,
+                    false);
+            mPointIndicatorImageRes = ta.getResourceId(R.styleable.RangeBar_pointIndicator,
+                    R.drawable.ic_adjust_red_24dp);
+            mPointIndicatorIndex = ta.getInt(R.styleable.RangeBar_pointIndicatorY,
+                    0);
+
         } finally {
 
             ta.recycle();
@@ -589,6 +639,22 @@ public class RangeBar extends View {
                 mTickHeightDP,
                 mBarWeight,
                 mBarColor);
+        invalidate();
+    }
+
+    /**
+     * Creates a new point indicator
+     */
+    private void createPointIndicator() {
+        float yPos = getYPos();
+
+        final float marginLeft = getMarginLeft();
+        final float barLength = getBarLength();
+
+        float x = marginLeft + (mPointIndicatorIndex / (float) (mTickCount - 1)) * barLength;
+        mPointIndicator = new PointIndicator(getContext(),
+                mShowPointIndicator,
+                mPointIndicatorImageRes, x, yPos, Color.RED);
         invalidate();
     }
 
